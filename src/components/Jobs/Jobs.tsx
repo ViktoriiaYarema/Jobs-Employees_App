@@ -1,20 +1,21 @@
-import React, { useEffect, useCallback} from "react";
+import React, { useEffect, useCallback } from "react";
 import { getJobsRepo } from "../../api/endpoints/endpoints";
-import { useDispatch, useSelector } from "react-redux";
-import {apiActions} from "../../api/reduxApi/apiActions";
-import {ApiEnum} from "../../api/models/api.enum";
-import {AccamulatorType} from "../../api/reduxApi/reducer";
+import { ApiEnum } from "../../api/models/api.enum";
+import { AccamulatorType } from "../../api/reduxApi/reducer";
+import { useFetch } from "../../hooks/useFetch";
+import { selectorApiState } from "../../api/saga/selectors";
+import store from "../../redux/store";
 
 const Jobs = () => {
-    const state = useSelector((state: {api: Record<string, AccamulatorType>} )=> state.api[ApiEnum.Jobs]);
+  const { response, performFetch } = useFetch(ApiEnum.Jobs);
 
-    console.log(state)
+  useEffect(() => {
+    performFetch();
+  }, [performFetch]);
 
-    return (
-        <div>
-          Hello word 
-        </div>
-    )
-} 
+  console.log(response);
+
+  return <div>Hello word</div>;
+};
 
 export default Jobs;
