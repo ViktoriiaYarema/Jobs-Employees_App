@@ -2,9 +2,11 @@ import { ActionType } from "./apiActions";
 import { API_ACTIONS } from "./apiActions";
 import { ENDPOINT } from "../models/enpoint.model";
 import { camelCase } from "lodash";
+import { JobType } from "../../enteties/entetiesJobs";
+import { EmployeeType } from "../../enteties/entetiesEmloyes";
 
 export type AccamulatorType = {
-  data: [] | null;
+  data: (JobType| EmployeeType)[] | null;
   loading: boolean;
   error: null | boolean;
 };
