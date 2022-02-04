@@ -1,12 +1,15 @@
-import {ApiEnum} from "./api.enum";
+import { ApiEnum } from "./api.enum";
+import {Api} from "../api";
 
 export const ENDPOINT = {
-  [ApiEnum.Jobs.toUpperCase()] : {
+  [ApiEnum.Jobs.toUpperCase()]: {
     uri: `/${ApiEnum.Jobs}`,
-    method: 'GET'
+    method: "GET",
+    request: Api.getJobs
   },
-  [ApiEnum.Employees.toUpperCase()] : {
+  [ApiEnum.Employees.toUpperCase()]: {
     uri: `/${ApiEnum.Employees}`,
-    method: 'GET'
+    method: "GET",
+    request: Api.getEmployees
   },
-}
+};
