@@ -1,4 +1,4 @@
 export enum ApiEnum {
   Jobs = "jobs",
-  Employees = "providers",
+  Providers = "providers",
 }

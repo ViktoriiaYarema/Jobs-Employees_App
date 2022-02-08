@@ -7,8 +7,8 @@ export const ENDPOINT = {
     method: "GET",
     request: Api.getJobs
   },
-  [ApiEnum.Employees.toUpperCase()]: {
-    uri: `/${ApiEnum.Employees}`,
+  [ApiEnum.Providers.toUpperCase()]: {
+    uri: `/${ApiEnum.Providers}`,
     method: "GET",
     request: Api.getEmployees
   },

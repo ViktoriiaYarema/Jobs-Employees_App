@@ -1,5 +1,5 @@
 import { ENDPOINT } from "../api/models/enpoint.model";
 
-export const apiHelper = (type: string) => {
-  return ENDPOINT[type.toUpperCase()].request;
+export const apiHelper = async (type: string) => {
+  return await ENDPOINT[type.toUpperCase()].request;
 };

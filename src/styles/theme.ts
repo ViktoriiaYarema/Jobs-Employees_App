@@ -8,13 +8,7 @@ declare module '@mui/material/styles' {
 }
 
 const theme = createTheme({
-  root: {
-    display: "flex",
-  },
-  content: {
-    flexGrow: 1,
-    padding: '10px',
-  },
+
 })
 
 export default theme;

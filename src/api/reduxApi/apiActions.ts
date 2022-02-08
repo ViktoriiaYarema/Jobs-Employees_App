@@ -1,9 +1,9 @@
-import { JobType } from "./../../enteties/entetiesJobs";
-import { EmployeeType } from "../../enteties/entetiesEmloyes";
+import { JobType } from "../../enteties/entetiesJobs";
+import { EmployeeType } from "../../enteties/entetiesEmloyees";
 
-export type ActionType = {
+export type ActionType<T = JobType> = {
   type: string;
-  payload?: null | (JobType| EmployeeType)[];
+  payload?: null | T[];
 };
 
 export const API_ACTIONS = {
@@ -17,9 +17,9 @@ export const apiActions = {
     type: `${API_ACTIONS.FETCH_START}${endpoint.toUpperCase()}`,
   }),
 
-  fetchSuccess: (
+  fetchSuccess: <T>(
     endpoint: string,
-    payload: any
+    payload: Promise<T[]> | null
   ) => ({
     type: `${API_ACTIONS.FETCH_SUCCESS}${endpoint.toUpperCase()}`,
     payload,
