@@ -1,6 +1,6 @@
 import { ActionType } from "./apiActions";
 import { API_ACTIONS } from "./apiActions";
-import { ENDPOINT } from "../models/enpoint.model";
+import { ENDPOINT } from "../../api/models/enpoint.model";
 import { camelCase } from "lodash";
 import { JobType } from "../../enteties/entetiesJobs";
 import { EmployeeType } from "../../enteties/entetiesEmloyees";

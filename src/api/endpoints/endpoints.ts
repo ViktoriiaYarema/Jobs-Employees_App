@@ -1,4 +1,4 @@
-import Base from "./BaseClient";
+import Base from "./base";
 import { ApiEnum } from "../models/api.enum";
 import { EmployeeType } from "../../enteties/entetiesEmloyees";
 import { JobType } from "../../enteties/entetiesJobs";

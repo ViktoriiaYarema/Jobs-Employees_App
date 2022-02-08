@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";
-import { apiReducer } from "../api/reduxApi/reducer";
+import { apiReducer } from "./reduxApi/reducer";
 import createSagaMiddleWare from "redux-saga";
-import apiSaga from "../api/saga/saga";
+import apiSaga from "./saga/saga";
 
 declare global {
   interface Window {
