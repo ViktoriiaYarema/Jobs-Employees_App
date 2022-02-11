@@ -1,18 +1,31 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const Header = () => {
+const drawerWidth = 240;
+
+interface IHeader {
+  onToggleEvent: () => void;
+}
+
+const Header: FC<IHeader> = ({ onToggleEvent }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ display: { md: "none" } }}
+            onClick={onToggleEvent}
           >
             <MenuIcon />
           </IconButton>

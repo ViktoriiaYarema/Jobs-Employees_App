@@ -1,11 +1,3 @@
-import { JobType } from "../../enteties/entetiesJobs";
-import { EmployeeType } from "../../enteties/entetiesEmloyees";
-
-export type ActionType<T = JobType> = {
-  type: string;
-  payload?: null | T[];
-};
-
 export const API_ACTIONS = {
   FETCH_START: "FETCH_START_",
   FETCH_SUCCESS: "FETCH_SUCCESS_",

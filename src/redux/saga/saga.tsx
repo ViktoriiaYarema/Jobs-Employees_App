@@ -1,8 +1,8 @@
 import { takeEvery, put, all } from "redux-saga/effects";
-import { apiActions, API_ACTIONS, ActionType } from "../reduxApi/apiActions";
+
+import { apiActions, API_ACTIONS } from "../reduxApi/apiActions";
 import { apiHelper } from "../../helpers/api.helper";
-import { JobType } from "../../enteties/entetiesJobs";
-import { EmployeeType } from "../../enteties/entetiesEmloyees";
+import { ActionType } from "../models/action.type";
 
 export function* onApiLoad<T>(action: ActionType<T>) {
   const actionType = action.type
@@ -18,8 +18,7 @@ export function* onApiLoad<T>(action: ActionType<T>) {
 
 export function* watchApiLoad() {
   yield takeEvery(
-    (action: ActionType) =>
-      action.type.startsWith(API_ACTIONS.FETCH_START),
+    (action: ActionType) => action.type.startsWith(API_ACTIONS.FETCH_START),
     onApiLoad
   );
 }

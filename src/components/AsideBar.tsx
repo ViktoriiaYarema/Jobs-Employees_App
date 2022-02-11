@@ -1,68 +1,67 @@
-import React, { useCallback, useState, FC } from "react";
-import {
-  Toolbar,
-  IconButton,
-  Hidden,
-  Divider,
-  Typography,
-  List,
-  Grid,
-  Drawer,
-  CircularProgress,
-  Box,
-} from "@mui/material";
-
-import IJobItem from "./JobItem";
-import { JobType } from "../enteties/entetiesJobs";
+import React, { FC } from "react";
+import { Divider, List, Grid, Drawer, CircularProgress } from "@mui/material";
+import { Box } from "@mui/system";
+const drawerWidth = 240;
 
 interface IAsideBar {
   loading?: boolean;
-  jobs: JobType[] | null;
+  children: React.ReactElement;
+  mobileOpen: boolean;
+  onCloseMobile: () => void;
 }
 
-const AsideBar: FC<IAsideBar> = ({ loading, jobs }) => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const handleDrawerToggle = useCallback(() => {
-    setMobileOpen(!mobileOpen);
-  }, [mobileOpen]);
-
+const AsideBar: FC<IAsideBar> = ({
+  loading,
+  children,
+  mobileOpen,
+  onCloseMobile,
+}) => {
   const drawer = (
-    <div>
-      <Divider />
+    <>
       <List>
-        {loading || !jobs ? (
+        {loading || !children ? (
           <Grid container>
             <CircularProgress />
           </Grid>
         ) : (
-          jobs.map(({ id, jobId, title }) => (
-            <IJobItem key={id} jobId={jobId} title={title} id={id} />
-          ))
+          children
         )}
       </List>
       <Divider />
-    </div>
+    </>
   );
+
   return (
-    <nav aria-label="mailbox folders">
-      <Hidden smUp implementation="css">
-        <Drawer
-          container={() => document.body}
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
-        <Drawer variant="permanent" open>
-          {drawer}
-        </Drawer>
-      </Hidden>
-    </nav>
+    <Box
+      component="nav"
+      sx={{ width: { md: 240 }, flexShrink: { sm: 0 } }}
+      aria-label="mailbox folders"
+    >
+      <Drawer
+        container={() => document.body}
+        open={mobileOpen}
+        onClose={onCloseMobile}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+      >
+        {drawer}
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", md: "block" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 };
 

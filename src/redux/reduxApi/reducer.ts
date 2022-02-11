@@ -1,9 +1,8 @@
-import { ActionType } from "./apiActions";
+import { ActionType } from "../models/action.type";
 import { API_ACTIONS } from "./apiActions";
 import { ENDPOINT } from "../../api/models/enpoint.model";
 import { camelCase } from "lodash";
 import { JobType } from "../../enteties/entetiesJobs";
-import { EmployeeType } from "../../enteties/entetiesEmloyees";
 
 export type AccamulatorType<T = JobType> = {
   data: T[] | null;

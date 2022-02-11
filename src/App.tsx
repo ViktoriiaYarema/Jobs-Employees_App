@@ -1,17 +1,17 @@
 import React from "react";
 import "./App.css";
 import Employees from "./modules/employee/EmployeesContainer";
-import Jobs from "./modules/jobs/JobsContainer";
-import Header from "./components/Header";
+import { Box } from "@mui/material";
+import { MainLayout } from "./layout/MainLayout";
 
 function App() {
   return (
-    <div>
-      {" "}
-      <Header />
-      <Jobs />
-      <Employees />
-    </div>
+    <MainLayout>
+      <Box component={"main"} sx={{ marginTop: "64px" }}>
+        {" "}
+        <Employees />
+      </Box>
+    </MainLayout>
   );
 }
 

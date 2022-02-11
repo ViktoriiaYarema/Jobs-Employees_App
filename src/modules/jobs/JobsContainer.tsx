@@ -1,21 +1,54 @@
 import React, { useEffect } from "react";
-import { ApiEnum } from "../../api/models/api.enum";
+import { useDispatch, useSelector } from "react-redux";
+import { Typography, Divider } from "@mui/material";
+
+import { selectorApp } from "../../redux/app/app.selector";
 import { useFetch } from "../../hooks/useFetch";
-import AsideBar from "../../components/AsideBar";
+import { ApiEnum } from "../../api/models/api.enum";
+import { appAction } from "../../redux/app/app.actions";
+
 import { JobType } from "../../enteties/entetiesJobs";
-import { Container } from "@mui/material";
+import JobItem from "../../components/JobItem";
 
 const Jobs = () => {
   const { response, performFetch } = useFetch<JobType>(ApiEnum.Jobs);
+  const { data } = response;
+  const dispatch = useDispatch();
+  const appState = useSelector(selectorApp);
 
   useEffect(() => {
     performFetch();
   }, [performFetch]);
-  
+
+  const performFilterEmployee = (jobTitle: string) =>
+    dispatch(appAction.filterJob(jobTitle));
+
   return (
-    <Container>
-      <AsideBar jobs={response.data || null} />
-    </Container>
+    <>
+      <Typography
+        variant="h6"
+        component={"h3"}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: 56,
+        }}
+      >
+        {ApiEnum.Jobs.toUpperCase()}
+      </Typography>
+      <Divider />
+      {data?.map(({ id, jobId, title }) => (
+        <JobItem
+          key={id}
+          jobId={jobId}
+          title={title}
+          id={id}
+          onClick={() => performFilterEmployee(jobId)}
+          selected={jobId === appState.selectedJob}
+        />
+      ))}
+    </>
   );
 };
 

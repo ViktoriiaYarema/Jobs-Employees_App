@@ -5,11 +5,13 @@ interface IJobItem {
   id: string;
   jobId: string;
   title: string;
+  selected: boolean;
+  onClick: () => void;
 }
 
-const JobItem: FC<IJobItem> = ({ id, jobId, title }) => {
+const JobItem: FC<IJobItem> = ({ id, title, selected, onClick }) => {
   return (
-    <ListItem>
+    <ListItem onClick={onClick} sx={{ cursor: "pointer" }} selected={selected}>
       <ListItemText primary={title} />
     </ListItem>
   );
