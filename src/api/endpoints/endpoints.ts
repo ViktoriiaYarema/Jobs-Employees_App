@@ -1,6 +1,6 @@
-import Base from "./BaseClient";
+import Base from "./base";
 import { ApiEnum } from "../models/api.enum";
-import { EmployeeType } from "../../enteties/entetiesEmloyes";
+import { EmployeeType } from "../../enteties/entetiesEmloyees";
 import { JobType } from "../../enteties/entetiesJobs";
 
 export const getJobsRepo = async (): Promise<JobType[]> => {
@@ -9,6 +9,6 @@ export const getJobsRepo = async (): Promise<JobType[]> => {
 };
 
 export const getEmployeesRepo = async (): Promise<EmployeeType[]> => {
-  const response = await Base.get(ApiEnum.Employees);
+  const response = await Base.get(ApiEnum.Providers);
   return response.data;
 };

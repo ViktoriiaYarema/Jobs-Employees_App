@@ -1,12 +1,11 @@
-import { ActionType } from "./apiActions";
+import { ActionType } from "../models/action.type";
 import { API_ACTIONS } from "./apiActions";
-import { ENDPOINT } from "../models/enpoint.model";
+import { ENDPOINT } from "../../api/models/enpoint.model";
 import { camelCase } from "lodash";
 import { JobType } from "../../enteties/entetiesJobs";
-import { EmployeeType } from "../../enteties/entetiesEmloyes";
 
-export type AccamulatorType = {
-  data: (JobType| EmployeeType)[] | null;
+export type AccamulatorType<T = JobType> = {
+  data: T[] | null;
   loading: boolean;
   error: null | boolean;
 };
