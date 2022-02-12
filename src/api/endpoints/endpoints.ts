@@ -12,3 +12,8 @@ export const getEmployeesRepo = async (): Promise<EmployeeType[]> => {
   const response = await Base.get(ApiEnum.Providers);
   return response.data;
 };
+
+export const getEmployeeRepo = async (id: string): Promise<EmployeeType> => {
+  const response = await Base.get(`${ApiEnum.Providers}/${id}`);
+  return response.data;
+};

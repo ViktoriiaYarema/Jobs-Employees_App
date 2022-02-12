@@ -1,4 +1,4 @@
-import { ActionType } from "../models/action.type";
+import { ActionTypeApi } from "../models/action.type";
 import { API_ACTIONS } from "./apiActions";
 import { ENDPOINT } from "../../api/models/enpoint.model";
 import { camelCase } from "lodash";
@@ -36,7 +36,7 @@ const onParseKey = (type: string, api: string) => {
   return camelCase(type.replaceAll(`${api}`, ""));
 };
 
-export const apiReducer = (state = INITIAL_STATE, action: ActionType) => {
+export const apiReducer = (state = INITIAL_STATE, action: ActionTypeApi) => {
   if (action.type.startsWith(API_ACTIONS.FETCH_START)) {
     const inner = onParseKey(action.type, API_ACTIONS.FETCH_START);
 
@@ -58,6 +58,15 @@ export const apiReducer = (state = INITIAL_STATE, action: ActionType) => {
         data: action.payload,
         loading: false,
         error: null,
+      },
+    };
+  } else if (action.type === API_ACTIONS.FETCH_EMPLOYEE) {
+    return {
+      ...state,
+      employee: {
+        data: [action.payload],
+        loading: false,
+        error: false,
       },
     };
   } else if (action.type.startsWith(API_ACTIONS.FETCH_FAILD)) {
