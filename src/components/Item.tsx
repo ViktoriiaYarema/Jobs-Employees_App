@@ -4,6 +4,7 @@ import { EmployeeType } from "../enteties/entetiesEmloyees";
 
 interface ItemProps {
   item: EmployeeType;
+  onClick: () => void;
 }
 
 function stringAvatar(name: string) {
@@ -12,7 +13,7 @@ function stringAvatar(name: string) {
   };
 }
 
-const Item: FC<ItemProps> = ({ item }) => {
+const Item: FC<ItemProps> = ({ item, onClick }) => {
   return (
     <>
       <Card
@@ -23,6 +24,7 @@ const Item: FC<ItemProps> = ({ item }) => {
           flexDirection: "column",
           justifyContent: "space-between",
         }}
+        onClick={onClick}
       >
         <Grid container spacing={0.5} direction="column" flexGrow={1}>
           <Grid
@@ -51,7 +53,13 @@ const Item: FC<ItemProps> = ({ item }) => {
           <Typography
             variant="subtitle2"
             align="center"
-            sx={{ fontWeight: 600 }}
+            sx={{
+              fontWeight: 600,
+              display: "flex",
+              flexGrow: 1,
+              alignItems: "flex-end",
+              justifyContent: "center",
+            }}
           >
             {item.job}
           </Typography>

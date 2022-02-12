@@ -1,8 +1,15 @@
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";
 import { apiReducer } from "./reduxApi/reducer";
 import createSagaMiddleWare from "redux-saga";
-import apiSaga from "./saga/saga";
+import rootSaga from "./saga/saga";
 import { appReducer } from "./app/app.reducer";
+import { createReduxHistoryContext } from "redux-first-history";
+import { createBrowserHistory } from "history";
+
+const { createReduxHistory, routerMiddleware, routerReducer } =
+  createReduxHistoryContext({
+    history: createBrowserHistory(),
+  });
 
 declare global {
   interface Window {
@@ -15,15 +22,16 @@ const composeEnhancers =
 
 const reducers = combineReducers({
   api: apiReducer,
+  router: routerReducer,
   app: appReducer,
 });
 
 const sagaMiddleWare = createSagaMiddleWare();
 
-const store = createStore(
+export const store = createStore(
   reducers,
-  composeEnhancers(applyMiddleware(sagaMiddleWare))
+  composeEnhancers(applyMiddleware(routerMiddleware, sagaMiddleWare))
 );
-sagaMiddleWare.run(apiSaga);
+sagaMiddleWare.run(rootSaga);
 
-export default store;
+export const history = createReduxHistory(store);

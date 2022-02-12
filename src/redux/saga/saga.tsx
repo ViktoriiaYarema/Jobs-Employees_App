@@ -1,10 +1,21 @@
-import { takeEvery, put, all } from "redux-saga/effects";
-
+import {
+  takeEvery,
+  put,
+  all,
+  take,
+  fork,
+} from "redux-saga/effects";
 import { apiActions, API_ACTIONS } from "../reduxApi/apiActions";
 import { apiHelper } from "../../helpers/api.helper";
-import { ActionType } from "../models/action.type";
+import {
+  ActionTypeApi,
+  ActionTypeReducerPath,
+} from "../models/action.type";
+import { getEmployeeRepo } from "../../api/endpoints/endpoints";
+import { EmployeeType } from "../../enteties/entetiesEmloyees";
+import { LOCATION_CHANGE } from "redux-first-history";
 
-export function* onApiLoad<T>(action: ActionType<T>) {
+export function* onApiLoad<T>(action: ActionTypeApi<T>) {
   const actionType = action.type
     .replace(API_ACTIONS.FETCH_START, "")
     .toLowerCase();
@@ -16,13 +27,29 @@ export function* onApiLoad<T>(action: ActionType<T>) {
   }
 }
 
+export function* onApiEmploee() {
+  while (true) {
+    const action: ActionTypeReducerPath = yield take(LOCATION_CHANGE);
+    const employeeId: string = action.payload.location.pathname.split("/")[1];
+
+    if (employeeId) {
+      const employee: EmployeeType = yield getEmployeeRepo(employeeId);
+      yield put(apiActions.fetchEmployee(employee));
+    }
+  }
+}
+
 export function* watchApiLoad() {
   yield takeEvery(
-    (action: ActionType) => action.type.startsWith(API_ACTIONS.FETCH_START),
+    (action: ActionTypeApi) => action.type.startsWith(API_ACTIONS.FETCH_START),
     onApiLoad
   );
 }
 
-export default function* apiRootSaga() {
-  yield all([watchApiLoad()]);
+export function* watchApiEmployee() {
+  yield fork(onApiEmploee);
+}
+
+export default function* rootSaga() {
+  yield all([watchApiLoad(), watchApiEmployee()]);
 }

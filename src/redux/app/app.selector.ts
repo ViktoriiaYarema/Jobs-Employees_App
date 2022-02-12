@@ -1,3 +1,3 @@
-export const selectorApp = (
-  state: Record<string, any>
-): { selectedJob: null | string } => state.app;
+import { StoreType } from "../models/store.model";
+
+export const selectorApp = (state: StoreType) => state.app;

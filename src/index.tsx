@@ -4,14 +4,21 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import CssBaseline from '@mui/material/CssBaseline';
+import { HistoryRouter as Router } from "redux-first-history/rr6";
+import { store, history } from "./redux/store";
+import CssBaseline from "@mui/material/CssBaseline";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <CssBaseline/>
-      <App />
+      {/* <BrowserRouter> */}
+      <Router history={history}>
+        <>
+          <CssBaseline />
+          <App />
+          {/* </BrowserRouter> */}
+        </>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
