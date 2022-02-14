@@ -14,7 +14,7 @@ const MainLayout: FC<IMainLayout> = ({ children }) => {
     setMobileOpen(!mobileOpen);
   }, [mobileOpen]);
   const drawerWidth = 240;
-
+  
   return (
     <>
       <Header onToggleEvent={handleDrawerToggle} />

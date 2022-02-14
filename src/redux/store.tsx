@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";
-import { apiReducer } from "./reduxApi/reducer";
+import { apiReducer } from "./api/api.reducer";
 import createSagaMiddleWare from "redux-saga";
 import rootSaga from "./saga/saga";
 import { appReducer } from "./app/app.reducer";

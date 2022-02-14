@@ -9,7 +9,7 @@ export interface ActionTypeApi<T = JobType> extends ActionType {
 }
 
 export interface ActionTypeEmployee<T = EmployeeType> extends ActionType {
-  payload: { id: string; data: T } | T;
+  payload: { id: string; data: T } | T | null;
 }
 
 export interface ActionTypeReducerPath extends ActionType {

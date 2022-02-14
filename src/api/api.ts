@@ -1,5 +1,7 @@
-import { getJobsRepo } from "./endpoints/endpoints";
-import { getEmployeesRepo } from "./endpoints/endpoints";
+import {
+  getJobsRepo,
+  getEmployeesRepo,
+} from "./endpoints/endpoints";
 
 export const Api = {
   getJobs: getJobsRepo(),

@@ -5,6 +5,7 @@ export const API_ACTIONS = {
   FETCH_SUCCESS: "FETCH_SUCCESS_",
   FETCH_FAILD: "FETCH_FAILD_",
   FETCH_EMPLOYEE: "FETCH_EMPLOYEE",
+  CLEAN_EMPLOYEE: "CLEAN_EMPLOYEE",
 };
 
 export const apiActions = {
@@ -25,5 +26,9 @@ export const apiActions = {
   fetchFailure: (endpoint: string, payload: any) => ({
     type: `${API_ACTIONS.FETCH_FAILD}${endpoint.toUpperCase()}`,
     payload,
+  }),
+  cleanEmployeeData: () => ({
+    type: API_ACTIONS.CLEAN_EMPLOYEE,
+    payload: null,
   }),
 };

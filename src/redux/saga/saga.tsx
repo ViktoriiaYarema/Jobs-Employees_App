@@ -1,16 +1,7 @@
-import {
-  takeEvery,
-  put,
-  all,
-  take,
-  fork,
-} from "redux-saga/effects";
-import { apiActions, API_ACTIONS } from "../reduxApi/apiActions";
+import { takeEvery, put, all, take, call } from "redux-saga/effects";
+import { apiActions, API_ACTIONS } from "../api/api.actions";
 import { apiHelper } from "../../helpers/api.helper";
-import {
-  ActionTypeApi,
-  ActionTypeReducerPath,
-} from "../models/action.type";
+import { ActionTypeApi, ActionTypeReducerPath } from "../models/action.type";
 import { getEmployeeRepo } from "../../api/endpoints/endpoints";
 import { EmployeeType } from "../../enteties/entetiesEmloyees";
 import { LOCATION_CHANGE } from "redux-first-history";
@@ -29,12 +20,17 @@ export function* onApiLoad<T>(action: ActionTypeApi<T>) {
 
 export function* onApiEmploee() {
   while (true) {
-    const action: ActionTypeReducerPath = yield take(LOCATION_CHANGE);
-    const employeeId: string = action.payload.location.pathname.split("/")[1];
+    const actionPath: ActionTypeReducerPath = yield take(LOCATION_CHANGE);
+    const employeeId: string =
+      actionPath.payload.location.pathname.split("/")[1];
 
-    if (employeeId) {
-      const employee: EmployeeType = yield getEmployeeRepo(employeeId);
-      yield put(apiActions.fetchEmployee(employee));
+    try {
+      if (employeeId) {
+        const employee: EmployeeType = yield getEmployeeRepo(employeeId);
+        yield put(apiActions.fetchEmployee(employee));
+      }
+    } catch (e) {
+      yield put(apiActions.fetchFailure("employee", e));
     }
   }
 }
@@ -47,7 +43,7 @@ export function* watchApiLoad() {
 }
 
 export function* watchApiEmployee() {
-  yield fork(onApiEmploee);
+  yield call(onApiEmploee);
 }
 
 export default function* rootSaga() {

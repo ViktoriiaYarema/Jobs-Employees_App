@@ -1,5 +1,5 @@
 import { ActionTypeApi } from "../models/action.type";
-import { API_ACTIONS } from "./apiActions";
+import { API_ACTIONS } from "./api.actions";
 import { ENDPOINT } from "../../api/models/enpoint.model";
 import { camelCase } from "lodash";
 import { JobType } from "../../enteties/entetiesJobs";
@@ -44,6 +44,7 @@ export const apiReducer = (state = INITIAL_STATE, action: ActionTypeApi) => {
       ...state,
       [inner]: {
         ...state[inner],
+        data: null,
         loading: true,
         error: null,
       },
@@ -66,7 +67,7 @@ export const apiReducer = (state = INITIAL_STATE, action: ActionTypeApi) => {
       employee: {
         data: [action.payload],
         loading: false,
-        error: false,
+        error: null,
       },
     };
   } else if (action.type.startsWith(API_ACTIONS.FETCH_FAILD)) {
@@ -78,6 +79,15 @@ export const apiReducer = (state = INITIAL_STATE, action: ActionTypeApi) => {
         ...state[innerFailed],
         loading: false,
         error: true,
+      },
+    };
+  } else if (action.type === API_ACTIONS.CLEAN_EMPLOYEE) {
+    return {
+      ...state,
+      employee: {
+        data: action.payload,
+        loading: false,
+        error: null,
       },
     };
   } else {

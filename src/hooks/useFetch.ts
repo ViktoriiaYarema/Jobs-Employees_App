@@ -1,8 +1,8 @@
 import { camelCase } from "lodash";
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { apiActions } from "../redux/reduxApi/apiActions";
-import { AccamulatorType } from "../redux/reduxApi/reducer";
+import { apiActions } from "../redux/api/api.actions";
+import { AccamulatorType } from "../redux/api/api.reducer";
 
 export function useFetch<T>(endpoint: string) {
   const dispatch = useDispatch();

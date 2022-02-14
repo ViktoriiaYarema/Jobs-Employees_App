@@ -1,5 +1,5 @@
 import { EmployeeType } from "../../enteties/entetiesEmloyees";
-import { AccamulatorType } from "../reduxApi/reducer";
+import { AccamulatorType } from "../api/api.reducer";
 
 export interface StoreType {
   app: {

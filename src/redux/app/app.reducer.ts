@@ -11,7 +11,7 @@ export const appReducer = (state = initialStateApp, action: ActionTypeApi) => {
       ...state,
       selectedJob: action.payload,
     };
-  } else {
+  }  else {
     return initialStateApp;
   }
 };
