@@ -19,7 +19,7 @@ const Item: FC<ItemProps> = ({ item, onClick }) => {
       <Card
         sx={{
           padding: 1.5,
-          minHeight: "120px",
+          height: "120px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",

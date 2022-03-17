@@ -18,15 +18,14 @@ const AsideBar: FC<IAsideBar> = ({
 }) => {
   const drawer = (
     <>
-      <List>
-        {loading || !children ? (
-          <Grid container>
-            <CircularProgress />
-          </Grid>
-        ) : (
-          children
-        )}
-      </List>
+      {loading || !children ? (
+        <Grid container>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        children
+      )}
+
       <Divider />
     </>
   );

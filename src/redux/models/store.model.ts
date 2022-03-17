@@ -11,6 +11,7 @@ export interface StoreType {
     employee?: AccamulatorType<EmployeeType>;
     providers?: AccamulatorType<EmployeeType>;
   };
+  
   router: {
     action: string;
     previousLocations: string;

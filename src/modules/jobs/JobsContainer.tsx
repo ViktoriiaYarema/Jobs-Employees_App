@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography, Divider } from "@mui/material";
+import { Typography, Divider, List } from "@mui/material";
 
 import { selectorApp } from "../../redux/app/app.selector";
 import { useFetch } from "../../hooks/useFetch";
@@ -10,7 +10,7 @@ import { appAction } from "../../redux/app/app.actions";
 import { JobType } from "../../enteties/entetiesJobs";
 import JobItem from "../../components/JobItem";
 
-const Jobs = () => {
+const JobsContainer = () => {
   const { response, performFetch } = useFetch<JobType>(ApiEnum.Jobs);
   const { data } = response;
   const dispatch = useDispatch();
@@ -20,8 +20,11 @@ const Jobs = () => {
     performFetch();
   }, [performFetch]);
 
-  const performFilterEmployee = (jobTitle: string) =>
-    dispatch(appAction.filterJob(jobTitle));
+  const performFilterEmployee = (jobTitle: string) => {
+    jobTitle === appState.selectedJob
+      ? dispatch(appAction.filterJob(""))
+      : dispatch(appAction.filterJob(jobTitle));
+  };
 
   return (
     <>
@@ -38,18 +41,20 @@ const Jobs = () => {
         {ApiEnum.Jobs.toUpperCase()}
       </Typography>
       <Divider />
-      {data?.map(({ id, jobId, title }) => (
-        <JobItem
-          key={id}
-          jobId={jobId}
-          title={title}
-          id={id}
-          onClick={() => performFilterEmployee(jobId)}
-          selected={jobId === appState.selectedJob}
-        />
-      ))}
+      <List>
+        {data?.map(({ id, jobId, title }) => (
+          <JobItem
+            key={id}
+            jobId={jobId}
+            title={title}
+            id={id}
+            onClick={() => performFilterEmployee(jobId)}
+            selected={jobId === appState.selectedJob}
+          />
+        ))}
+      </List>
     </>
   );
 };
 
-export default Jobs;
+export default JobsContainer;
