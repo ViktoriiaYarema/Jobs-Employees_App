@@ -42,7 +42,7 @@ const Item: FC<ItemProps> = ({ item, onClick }) => {
             />
             <Box component={"div"} sx={{ marginLeft: 2 }}>
               <Typography component={"h3"} variant="subtitle2">
-                {item.name}
+                {item.name}{" "}
               </Typography>
               <Typography variant="body2" sx={{ wordBreak: "break-word" }}>
                 {item.email}
@@ -51,6 +51,7 @@ const Item: FC<ItemProps> = ({ item, onClick }) => {
           </Grid>
 
           <Typography
+            data-cy='job-name'
             variant="subtitle2"
             align="center"
             sx={{
@@ -61,6 +62,7 @@ const Item: FC<ItemProps> = ({ item, onClick }) => {
               justifyContent: "center",
             }}
           >
+            {" "}
             {item.job}
           </Typography>
         </Grid>

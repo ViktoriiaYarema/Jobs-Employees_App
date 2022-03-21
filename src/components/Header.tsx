@@ -12,7 +12,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { getRoutes } from "../routes/routes";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectorApp } from "../redux/app/app.selector";
 import { appAction } from "../redux/app/app.actions";
 
@@ -26,7 +26,7 @@ const Header: FC<IHeader> = ({ onToggleEvent }) => {
   const appState = useSelector(selectorApp);
   const navigation = useNavigate();
   const { pathname } = useLocation();
-
+  const dispatch = useDispatch();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -48,8 +48,11 @@ const Header: FC<IHeader> = ({ onToggleEvent }) => {
             spacing={1}
             sx={{ cursor: "pointer" }}
             onClick={() => {
-              navigation(getRoutes().home.url);
-              appState.selectedJob && appAction.filterJob(appState.selectedJob);
+              if (pathname !== getRoutes().home.url) {
+                navigation(getRoutes().home.url);
+              } else {
+                appState.selectedJob && dispatch(appAction.filterJob(''));
+              }
             }}
           >
             {pathname !== getRoutes().home.url && <ArrowBackIosIcon />}
