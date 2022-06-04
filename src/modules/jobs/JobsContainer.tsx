@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Typography, Divider, List } from "@mui/material";
@@ -11,23 +11,35 @@ import { appAction } from "../../redux/app/app.actions";
 import { JobType } from "../../enteties/entetiesJobs";
 import JobItem from "../../components/JobItem";
 import { getRoutes } from "../../routes/routes";
+import { getJobsRepo } from "../../api/endpoints/endpoints";
 
 const JobsContainer = () => {
-  const { response, performFetch } = useFetch<JobType>(ApiEnum.Jobs);
-  const { data } = response;
+  const [data, setData] = useState<JobType[] | null>(null);
+  // const { response, performFetch } = useFetch<JobType>(ApiEnum.Jobs);
+  // const { data } = response;
   const dispatch = useDispatch();
   const appState = useSelector(selectorApp);
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const fetchData = useCallback(async () => {
+    const res = await getJobsRepo();
+    setData(res);
+  }, []);
+
   useEffect(() => {
-    performFetch();
-  }, [performFetch]);
+    fetchData();
+  }, [fetchData]);
+  // useEffect(() => {
+  //   performFetch();
+  // }, [performFetch]);
 
   const performFilterEmployee = (jobTitle: string) => {
     jobTitle === appState.selectedJob
       ? dispatch(appAction.filterJob(""))
       : dispatch(appAction.filterJob(jobTitle));
+
     if (pathname !== getRoutes().home.url) {
       navigate(getRoutes().home.url);
     }
@@ -45,11 +57,12 @@ const JobsContainer = () => {
           justifyContent: "center",
           height: 56,
         }}
+        onClick={checkFunn}
       >
         {ApiEnum.Jobs.toUpperCase()}
       </Typography>
       <Divider />
-      <List>
+      <List data-testid="job-list">
         {data?.map(({ id, jobId, title }) => (
           <JobItem
             key={id}

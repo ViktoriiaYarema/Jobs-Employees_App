@@ -51,7 +51,7 @@ const Header: FC<IHeader> = ({ onToggleEvent }) => {
               if (pathname !== getRoutes().home.url) {
                 navigation(getRoutes().home.url);
               } else {
-                appState.selectedJob && dispatch(appAction.filterJob(''));
+                appState.selectedJob && dispatch(appAction.filterJob(""));
               }
             }}
           >
@@ -60,7 +60,12 @@ const Header: FC<IHeader> = ({ onToggleEvent }) => {
               Employees
             </Typography>
             {appState.selectedJob && (
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1 }}
+                data-testId="selected-job"
+              >
                 / {appState.selectedJob}
               </Typography>
             )}

@@ -9,6 +9,7 @@
     "@mui/material": "^5.4.0",
     "@mui/styled-engine-sc": "^5.3.0",
     "@mui/styles": "^5.3.0",
+    "@testing-library/react": "^11.2.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/chai": "^4.3.0",
@@ -44,6 +45,8 @@
   "scripts": {
     "start": "env-cmd -f .env.local react-scripts start",
     "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:jest": "jest",
     "check-types": "tsc",
     "eject": "react-scripts eject",
     "test:cypress": "start-server-and-test start http://localhost:3000 cypress",
@@ -74,15 +77,19 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
     "@cypress/react": "^5.12.4",
     "@cypress/webpack-dev-server": "^1.8.3",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/react": "^12.1.4",
     "@types/lodash": "^4.14.178",
     "@types/ramda": "^0.27.64",
+    "@types/redux-mock-store": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "cypress": "^9.5.2",
     "jest": "^27.5.1",
-    "prettier": "^2.5.1"
+    "jest-watch-typeahead": "^0.6.5",
+    "prettier": "^2.5.1",
+    "redux-mock-store": "^1.5.4"
   }
 }

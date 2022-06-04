@@ -6,6 +6,7 @@ export const getRoutes = () => ({
     url: "/",
     component: MainLayout,
   },
+
   selectedJob: {
     url: "/:selectedJob",
     component: EmployeesContainer,

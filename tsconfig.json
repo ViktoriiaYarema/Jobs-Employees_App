@@ -18,7 +18,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "types": ["cypress"]
+    "types": ["cypress"],
   },
   "include": ["src", "cypress/integration/EmploeeApp.spec.ts"]
 }

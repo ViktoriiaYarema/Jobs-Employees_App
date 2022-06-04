@@ -11,7 +11,12 @@ interface IJobItem {
 
 const JobItem: FC<IJobItem> = ({ id, title, selected, onClick }) => {
   return (
-    <ListItem onClick={onClick} sx={{ cursor: "pointer" }} selected={selected}>
+    <ListItem
+      data-testid={`job-item-${id}`}
+      onClick={onClick}
+      sx={{ cursor: "pointer" }}
+      selected={selected}
+    >
       <ListItemText primary={title} />
     </ListItem>
   );
